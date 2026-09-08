@@ -313,14 +313,7 @@ function startInterstitial(){
 }
 
 function finishInterstitial(){
-  const win = window.open('about:blank', '_blank');
-  if (win) {
-    win.document.write('<iframe src="notes.html" style="position:fixed;top:0;left:0;width:100%;height:100%;border:0;"></iframe>');
-    win.document.title = 'DontSkipClass';
-  } else {
-    // Popup blocked — fall back to a normal same-tab redirect
-    window.location.href = 'notes.html';
-  }
+  window.location.href = 'notes.html';
 }
 
 // Request each manual ad unit once the page loads (needed for real ads to render)
