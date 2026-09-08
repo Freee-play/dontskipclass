@@ -5,18 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#17151F">
 <title>DontSkipClass</title>
+
+<!--
+  ── ADS ──────────────────────────────────────────────────────────
+  Auto ads (enable_page_level_ads) has been intentionally left OUT.
+  Auto ads can inject its own overlay/anchor/vignette ad elements
+  anywhere on the page at runtime, sometimes on top of interactive
+  content — which is what was silently swallowing clicks on the
+  Continue button. Sticking to only the manual <ins> slots below
+  keeps full control over where ads can appear.
+-->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1150384056492176" crossorigin="anonymous"></script>
 <script>
   window.adsbygoogle = window.adsbygoogle || [];
-  // TEMP TEST: Auto ads disabled to check if it was blocking clicks
-  // adsbygoogle.push({
-  //   google_ad_client: "ca-pub-1150384056492176",
-  //   enable_page_level_ads: true
-  // });
 </script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -26,15 +33,20 @@
   --text:#F1EFFA;--muted:#9691B8;
 }
 html,body{min-height:100vh;}
-body{font-family:'Space Mono',monospace;background:
-  radial-gradient(circle at 20% 0%, rgba(108,92,231,0.08) 0%, transparent 45%),
-  radial-gradient(circle at 85% 15%, rgba(255,138,101,0.05) 0%, transparent 40%),
-  var(--bg);
-  color:var(--text);}
+body{
+  font-family:'Space Mono',monospace;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(108,92,231,0.08) 0%, transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(255,138,101,0.05) 0%, transparent 40%),
+    var(--bg);
+  color:var(--text);
+}
 .page{display:flex;flex-direction:column;min-height:100vh;}
 
-/* ── AD SLOTS ── */
-.ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;}
+/* ── AD SLOTS ──────────────────────────────────────────────────
+   Every ad container is inline-flow (not position:fixed/absolute),
+   sized, and does not overlap interactive elements. */
+.ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1;}
 .ad-slot{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;transition:border-color 0.2s;}
 .ad-label{font-size:0.55rem;letter-spacing:2px;color:var(--muted);opacity:0.55;text-align:center;text-transform:uppercase;}
 .ad-top-wrap{padding:0.8rem 2rem 0;}
@@ -53,9 +65,10 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 .sidebar-ad{width:100%;height:500px;align-self:flex-start;position:sticky;top:1rem;}
 .content-area{flex:1;min-width:0;padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:0;min-height:calc(100vh - 260px);}
 
-/* ── ENTER CARD (bigger + more centered) ── */
+/* ── ENTER CARD ── */
 .enter-card{
   position:relative;
+  z-index:2;
   background:linear-gradient(160deg,var(--surface2) 0%,#251F3A 100%);
   border:1px solid rgba(108,92,231,0.3);
   border-radius:22px;
@@ -78,6 +91,7 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 .enter-card p{font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;}
 .enter-btn{
   position:relative;
+  z-index:3;
   width:100%;
   max-width:360px;
   background:linear-gradient(135deg, rgba(108,92,231,0.22), rgba(108,92,231,0.12));
@@ -98,105 +112,29 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 .enter-btn:active{transform:translateY(0);}
 .enter-note{font-size:0.68rem;color:var(--muted);opacity:0.65;margin-top:18px;letter-spacing:1px;}
 
-/* ── REASONS SECTION BELOW ── */
-.reasons-section {
-  width: 100%;
-  max-width: 900px;
-  margin: 2.5rem auto 2.5rem;
-  padding: 0 1.5rem;
-  text-align: left;
-}
-.reasons-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.3rem;
-  color: var(--neon);
-  text-align: center;
-  margin-bottom: 0.4rem;
-  letter-spacing: 2px;
-}
-.reasons-subtitle{
-  text-align:center;
-  font-size:0.72rem;
-  color:var(--muted);
-  letter-spacing:1px;
-  margin-bottom:2rem;
-  opacity:0.8;
-}
-.reasons-grid{
-  display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:1.1rem;
-}
-.reason-card {
-  position:relative;
-  background: linear-gradient(160deg, var(--surface2) 0%, #241F38 100%);
-  border: 1px solid rgba(108,92,231,0.22);
-  border-radius: 14px;
-  padding: 1.5rem 1.5rem 1.5rem 1.4rem;
-  display:flex;
-  gap:1rem;
-  align-items:flex-start;
-  transition:transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.reason-card:hover{
-  transform:translateY(-3px);
-  border-color:rgba(108,92,231,0.5);
-  box-shadow:0 10px 30px rgba(108,92,231,0.15);
-}
-.reason-num{
-  flex-shrink:0;
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:rgba(108,92,231,0.15);
-  border:1px solid rgba(108,92,231,0.4);
-  color:var(--neon);
-  font-family:'Orbitron',sans-serif;
-  font-size:0.8rem;
-  font-weight:900;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.reason-body h3 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.85rem;
-  color: var(--text);
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-}
-.reason-body p {
-  font-size: 0.75rem;
-  color: var(--muted);
-  line-height: 1.6;
-}
+/* ── REASONS SECTION ── */
+.reasons-section{width:100%;max-width:900px;margin:2.5rem auto 2.5rem;padding:0 1.5rem;text-align:left;}
+.reasons-title{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:var(--neon);text-align:center;margin-bottom:0.4rem;letter-spacing:2px;}
+.reasons-subtitle{text-align:center;font-size:0.72rem;color:var(--muted);letter-spacing:1px;margin-bottom:2rem;opacity:0.8;}
+.reasons-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:1.1rem;}
+.reason-card{position:relative;background:linear-gradient(160deg, var(--surface2) 0%, #241F38 100%);border:1px solid rgba(108,92,231,0.22);border-radius:14px;padding:1.5rem 1.5rem 1.5rem 1.4rem;display:flex;gap:1rem;align-items:flex-start;transition:transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;}
+.reason-card:hover{transform:translateY(-3px);border-color:rgba(108,92,231,0.5);box-shadow:0 10px 30px rgba(108,92,231,0.15);}
+.reason-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(108,92,231,0.15);border:1px solid rgba(108,92,231,0.4);color:var(--neon);font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.reason-body h3{font-family:'Orbitron',sans-serif;font-size:0.85rem;color:var(--text);margin-bottom:6px;letter-spacing:0.5px;}
+.reason-body p{font-size:0.75rem;color:var(--muted);line-height:1.6;}
 
-.info-panel{
-  margin-top:1.6rem;
-  background:linear-gradient(160deg, rgba(108,92,231,0.08), rgba(108,92,231,0.02));
-  border:1px solid rgba(108,92,231,0.2);
-  border-radius:14px;
-  padding:1.6rem 1.8rem;
-}
-.info-panel h3{
-  font-family:'Orbitron',sans-serif;
-  font-size:0.85rem;
-  color:var(--neon);
-  letter-spacing:1px;
-  margin-bottom:10px;
-}
-.info-panel p{
-  font-size:0.75rem;
-  color:var(--muted);
-  line-height:1.7;
-  margin-bottom:10px;
-}
+.info-panel{margin-top:1.6rem;background:linear-gradient(160deg, rgba(108,92,231,0.08), rgba(108,92,231,0.02));border:1px solid rgba(108,92,231,0.2);border-radius:14px;padding:1.6rem 1.8rem;}
+.info-panel h3{font-family:'Orbitron',sans-serif;font-size:0.85rem;color:var(--neon);letter-spacing:1px;margin-bottom:10px;}
+.info-panel p{font-size:0.75rem;color:var(--muted);line-height:1.7;margin-bottom:10px;}
 .info-panel p:last-child{margin-bottom:0;}
 
 footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;font-size:0.62rem;color:var(--muted);letter-spacing:1px;}
 
-/* ── AD OVERLAY (skippable) ── */
-.ad-overlay{display:none;position:fixed;inset:0;background:rgba(10,8,16,0.96);backdrop-filter:blur(3px);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:18px;}
+/* ── AD OVERLAY (skippable interstitial) ──
+   Given the highest z-index on the page so nothing (including any
+   future ad element) can ever render on top of it and block the
+   skip button. */
+.ad-overlay{display:none;position:fixed;inset:0;background:rgba(10,8,16,0.96);backdrop-filter:blur(3px);z-index:2147483000;align-items:center;justify-content:center;flex-direction:column;gap:18px;}
 .ad-overlay.open{display:flex;}
 .ad-overlay-box{width:min(90vw,640px);height:min(70vh,400px);background:linear-gradient(160deg,var(--surface2),#241F38);border:1px solid rgba(108,92,231,0.3);border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;box-shadow:0 20px 70px rgba(108,92,231,0.2);}
 .ad-overlay-skip{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:2px;padding:11px 26px;cursor:pointer;transition:all 0.15s;text-transform:uppercase;}
@@ -264,7 +202,6 @@ footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;
     </div>
   </div>
 
-  <!-- Reasons section placed below everything else on the naturally long page -->
   <div class="reasons-section">
     <div class="reasons-title">// Why You Shouldn't Skip Class</div>
     <div class="reasons-subtitle">A few reminders before you head out</div>
@@ -374,6 +311,7 @@ function startInterstitial(){
     }
   }, 1000);
 }
+
 function finishInterstitial(){
   const win = window.open('about:blank', '_blank');
   if (win) {
@@ -384,7 +322,8 @@ function finishInterstitial(){
     window.location.href = 'notes.html';
   }
 }
-// Request each ad unit once the page loads (needed for real ads to render)
+
+// Request each manual ad unit once the page loads (needed for real ads to render)
 window.addEventListener('load', ()=>{
   document.querySelectorAll('ins.adsbygoogle').forEach(()=>{
     try{ (adsbygoogle = window.adsbygoogle || []).push({}); }catch(e){}
