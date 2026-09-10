@@ -8,12 +8,18 @@
 
 <!--
   ── ADS ──────────────────────────────────────────────────────────
-  Auto ads (enable_page_level_ads) has been intentionally left OUT.
-  Auto ads can inject its own overlay/anchor/vignette ad elements
-  anywhere on the page at runtime, sometimes on top of interactive
-  content — which is what was silently swallowing clicks on the
-  Continue button. Sticking to only the manual <ins> slots below
-  keeps full control over where ads can appear.
+  Auto ads (enable_page_level_ads) intentionally left OUT — it can
+  inject overlay/anchor ads anywhere at runtime, which previously
+  swallowed clicks. Only manual, sized, inline-flow <ins> slots below.
+
+  ── COUNTDOWN / OVERLAY ────────────────────────────────────────
+  The Continue button is a plain <a href="#ad-overlay"> link, NOT a
+  JS onclick handler. Showing the overlay and running the 5-second
+  countdown number is done entirely with CSS (:target + a keyframe
+  animation on ::before content). This means the overlay and visible
+  countdown will work even if something else on the page throws a
+  JS error — the only JS below is the one thing CSS truly cannot do:
+  opening a new browser tab.
 -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1150384056492176" crossorigin="anonymous"></script>
 <script>
@@ -43,9 +49,7 @@ body{
 }
 .page{display:flex;flex-direction:column;min-height:100vh;}
 
-/* ── AD SLOTS ──────────────────────────────────────────────────
-   Every ad container is inline-flow (not position:fixed/absolute),
-   sized, and does not overlap interactive elements. */
+/* ── AD SLOTS ── */
 .ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1;}
 .ad-slot{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;transition:border-color 0.2s;}
 .ad-label{font-size:0.55rem;letter-spacing:2px;color:var(--muted);opacity:0.55;text-align:center;text-transform:uppercase;}
@@ -92,6 +96,7 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 .enter-btn{
   position:relative;
   z-index:3;
+  display:inline-block;
   width:100%;
   max-width:360px;
   background:linear-gradient(135deg, rgba(108,92,231,0.22), rgba(108,92,231,0.12));
@@ -105,6 +110,7 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
   padding:19px;
   cursor:pointer;
   text-transform:uppercase;
+  text-decoration:none;
   transition:all 0.2s ease;
   box-shadow:0 8px 30px rgba(108,92,231,0.25);
 }
@@ -134,16 +140,30 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 
 footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;font-size:0.62rem;color:var(--muted);letter-spacing:1px;}
 
-/* ── AD OVERLAY (skippable interstitial) ──
-   Given the highest z-index on the page so nothing (including any
-   future ad element) can ever render on top of it and block the
-   skip button. */
-.ad-overlay{display:none;position:fixed;inset:0;background:rgba(10,8,16,0.96);backdrop-filter:blur(3px);z-index:2147483000;align-items:center;justify-content:center;flex-direction:column;gap:18px;}
-.ad-overlay.open{display:flex;}
-.ad-overlay-box{width:min(90vw,640px);height:min(70vh,400px);background:linear-gradient(160deg,var(--surface2),#241F38);border:1px solid rgba(108,92,231,0.3);border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;box-shadow:0 20px 70px rgba(108,92,231,0.2);}
-.ad-overlay-skip{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:2px;padding:11px 26px;cursor:pointer;transition:all 0.15s;text-transform:uppercase;}
-.ad-overlay-skip:hover{border-color:var(--neon);color:var(--neon);}
-.ad-overlay-skip:disabled{opacity:0.4;cursor:not-allowed;}
+/* ── COUNTDOWN OVERLAY (pure CSS — shown via :target, no JS) ──
+   Highest possible z-index so nothing can ever render on top of it. */
+#ad-overlay{display:none;position:fixed;inset:0;background:rgba(10,8,16,0.96);backdrop-filter:blur(3px);z-index:2147483000;align-items:center;justify-content:center;flex-direction:column;gap:20px;padding:2rem;text-align:center;}
+#ad-overlay:target{display:flex;}
+.ad-overlay-box{width:min(90vw,640px);height:min(60vh,340px);background:linear-gradient(160deg,var(--surface2),#241F38);border:1px solid rgba(108,92,231,0.3);border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;box-shadow:0 20px 70px rgba(108,92,231,0.2);}
+
+.countdown-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.countdown-num{font-family:'Orbitron',sans-serif;font-size:3.2rem;font-weight:900;color:var(--neon);line-height:1;text-shadow:0 0 30px rgba(108,92,231,0.4);}
+/* This is the pure-CSS countdown: content changes in discrete steps
+   as the animation plays, no JavaScript involved. It starts the
+   instant #ad-overlay becomes visible via :target. */
+#ad-overlay:target .countdown-num::before{
+  content:"5";
+  animation: countdown-text 5s steps(1,end) forwards;
+}
+@keyframes countdown-text{
+  0%{content:"5";}
+  20%{content:"4";}
+  40%{content:"3";}
+  60%{content:"2";}
+  80%{content:"1";}
+  100%{content:"0";}
+}
+.countdown-caption{font-size:0.68rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
 
 .mobile-ad-wrap{display:none;}
 
@@ -190,8 +210,8 @@ footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;
         <div class="enter-eyebrow">// Welcome back</div>
         <h1>Ready to play?</h1>
         <p>Tap continue to head inside. A quick ad helps keep everything on this site free.</p>
-        <button class="enter-btn" onclick="startInterstitial()">▶ Continue</button>
-        <div class="enter-note">You can skip the ad after a few seconds</div>
+        <a href="#ad-overlay" class="enter-btn">▶ Continue</a>
+        <div class="enter-note">Loads automatically in 5 seconds</div>
         <div class="trust-strip">
           <div class="trust-item"><span class="icon">🔒</span> No Sign Up</div>
           <div class="trust-item"><span class="icon">⚡</span> Instant Load</div>
@@ -295,47 +315,46 @@ footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;
   <footer>ALWAYS FREE · NO SIGN UP · &copy; 2026</footer>
 </div>
 
-<!-- Skippable interstitial ad, shown on "Continue" -->
+<!-- Countdown overlay — shown purely by CSS :target when the URL
+     hash becomes #ad-overlay (i.e. when the Continue link is clicked).
+     No onclick, no JS needed for this part to appear. -->
 <div class="ad-overlay" id="ad-overlay">
   <div class="ad-label">Advertisement</div>
-  <div class="ad-overlay-box" id="ad-overlay-box">[ INTERSTITIAL AD ]</div>
-  <button class="ad-overlay-skip" id="skip-btn" disabled onclick="finishInterstitial()">Skip in 5</button>
+  <div class="ad-overlay-box">[ INTERSTITIAL AD ]</div>
+  <div class="countdown-wrap">
+    <div class="countdown-num"></div>
+    <div class="countdown-caption">Loading your game…</div>
+  </div>
 </div>
 
 <script>
-function startInterstitial(){
-  const overlay = document.getElementById('ad-overlay');
-  const skipBtn = document.getElementById('skip-btn');
-  overlay.classList.add('open');
-  let secondsLeft = 5;
-  skipBtn.textContent = `Skip in ${secondsLeft}`;
-  const timer = setInterval(()=>{
-    secondsLeft--;
-    if(secondsLeft <= 0){
-      clearInterval(timer);
-      skipBtn.disabled = false;
-      skipBtn.textContent = 'Skip ▶';
-    } else {
-      skipBtn.textContent = `Skip in ${secondsLeft}`;
-    }
-  }, 1000);
-}
+// The ONLY thing JS is used for on this page: opening a new tab.
+// CSS/HTML above handles showing the overlay and running the visible
+// countdown entirely on their own, so even if this script failed to
+// run for any reason, the overlay and countdown would still work —
+// only the auto-redirect into notes.html would be missing.
 
-function finishInterstitial(){
+window.addEventListener('hashchange', function(){
+  if(location.hash === '#ad-overlay'){
+    setTimeout(openNotesTab, 5000);
+  }
+});
+
+function openNotesTab(){
   const win = window.open('about:blank', '_blank');
   if(win){
     win.document.open();
     win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="notes.html"></iframe></body></html>');
     win.document.close();
   } else {
-    // Popup blocked — fall back to a normal same-tab redirect
+    // Popup blocked — fall back to a same-tab redirect
     window.location.href = 'notes.html';
   }
 }
 
-// Request each manual ad unit once the page loads (needed for real ads to render)
-window.addEventListener('load', ()=>{
-  document.querySelectorAll('ins.adsbygoogle').forEach(()=>{
+// Request each manual ad unit once the page loads
+window.addEventListener('load', function(){
+  document.querySelectorAll('ins.adsbygoogle').forEach(function(){
     try{ (adsbygoogle = window.adsbygoogle || []).push({}); }catch(e){}
   });
 });
