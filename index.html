@@ -4,16 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#17151F">
-<title>DontSkipClass — The In-Between Moment</title>
-<meta name="description" content="Free unblocked games for the in-between moments of your school day. No sign up, always free.">
+<title>DontSkipClass</title>
 
 <!--
-  NOTE ON ADS: intentionally no ad scripts or ad networks wired up
-  in this version. The layout below reserves clearly-labeled spaces
-  (top banner, sidebar, in-content, mobile, footer) so a network
-  can be dropped in later without restructuring anything. Keeping
-  this build 100% dependency-free while things get debugged.
+  ── ADS ──────────────────────────────────────────────────────────
+  Auto ads (enable_page_level_ads) has been intentionally left OUT.
+  Auto ads can inject its own overlay/anchor/vignette ad elements
+  anywhere on the page at runtime, sometimes on top of interactive
+  content — which is what was silently swallowing clicks on the
+  Continue button. Sticking to only the manual <ins> slots below
+  keeps full control over where ads can appear.
 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1150384056492176" crossorigin="anonymous"></script>
+<script>
+  window.adsbygoogle = window.adsbygoogle || [];
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,29 +43,32 @@ body{
 }
 .page{display:flex;flex-direction:column;min-height:100vh;}
 
-/* ── AD PLACEHOLDER SLOTS (static, no scripts) ── */
-.ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;}
-.ad-slot{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;width:100%;}
+/* ── AD SLOTS ──────────────────────────────────────────────────
+   Every ad container is inline-flow (not position:fixed/absolute),
+   sized, and does not overlap interactive elements. */
+.ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1;}
+.ad-slot{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;transition:border-color 0.2s;}
 .ad-label{font-size:0.55rem;letter-spacing:2px;color:var(--muted);opacity:0.55;text-align:center;text-transform:uppercase;}
 .ad-top-wrap{padding:0.8rem 2rem 0;}
-.ad-top{height:90px;}
-.ad-between{height:90px;margin-top:2.2rem;max-width:600px;margin-left:auto;margin-right:auto;}
-.ad-footer{height:90px;}
+.ad-top{width:100%;height:90px;}
+.ad-between{width:100%;height:90px;margin-top:2.2rem;}
+.ad-footer{width:100%;height:90px;}
 .ad-footer-wrap{padding:0 2rem 1.4rem;margin-top:0.4rem;}
-.sidebar-ad{height:500px;position:sticky;top:1rem;}
-.mobile-ad-wrap{display:none;}
 
 header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(108,92,231,0.06) 0%,transparent 100%);text-align:center;}
 .logo{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:6px;color:var(--neon);text-shadow:0 0 20px rgba(108,92,231,0.35);}
+.logo span{color:var(--neon2);}
 .tagline{font-size:0.65rem;color:var(--muted);letter-spacing:3px;margin-top:6px;text-transform:uppercase;}
 
 .body-wrap{display:flex;flex:1;max-width:1280px;margin:0 auto;width:100%;}
-.sidebar{width:180px;flex-shrink:0;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:flex-start;}
-.content-area{flex:1;min-width:0;padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.sidebar{width:180px;flex-shrink:0;padding:1.5rem 1rem;display:flex;flex-direction:column;gap:1rem;}
+.sidebar-ad{width:100%;height:500px;align-self:flex-start;position:sticky;top:1rem;}
+.content-area{flex:1;min-width:0;padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:0;min-height:calc(100vh - 260px);}
 
 /* ── ENTER CARD ── */
 .enter-card{
   position:relative;
+  z-index:2;
   background:linear-gradient(160deg,var(--surface2) 0%,#251F3A 100%);
   border:1px solid rgba(108,92,231,0.3);
   border-radius:22px;
@@ -68,7 +76,7 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
   max-width:680px;
   width:100%;
   box-shadow:0 0 0 1px rgba(255,255,255,0.02) inset, 0 25px 90px rgba(108,92,231,0.22), 0 0 120px rgba(108,92,231,0.08);
-  margin:2rem auto;
+  margin:auto;
   overflow:hidden;
 }
 .enter-card::before{
@@ -82,6 +90,8 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 .enter-card h1{font-family:'Orbitron',sans-serif;font-size:2.9rem;letter-spacing:1px;margin-bottom:20px;color:var(--text);line-height:1.15;text-shadow:0 0 30px rgba(108,92,231,0.25);}
 .enter-card p{font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;}
 .enter-btn{
+  position:relative;
+  z-index:3;
   width:100%;
   max-width:360px;
   background:linear-gradient(135deg, rgba(108,92,231,0.22), rgba(108,92,231,0.12));
@@ -100,34 +110,20 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 }
 .enter-btn:hover{background:linear-gradient(135deg, rgba(108,92,231,0.38), rgba(108,92,231,0.22));transform:translateY(-2px);box-shadow:0 12px 36px rgba(108,92,231,0.38);}
 .enter-btn:active{transform:translateY(0);}
-.enter-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 .enter-note{font-size:0.68rem;color:var(--muted);opacity:0.65;margin-top:18px;letter-spacing:1px;}
 
-/* ── IN-BETWEEN MOMENT FEATURE ── */
-.moment-section{
-  width:100%;
-  max-width:800px;
-  margin:1rem auto 3rem;
-  padding:2.2rem 2rem;
-  text-align:left;
-  background:linear-gradient(135deg, rgba(255,138,101,0.1), rgba(108,92,231,0.08));
-  border:1px solid rgba(255,138,101,0.25);
-  border-radius:18px;
-}
-.moment-eyebrow{font-size:0.65rem;letter-spacing:3px;color:var(--neon2);text-transform:uppercase;margin-bottom:12px;font-weight:700;}
-.moment-section h2{font-family:'Orbitron',sans-serif;font-size:1.4rem;color:var(--text);margin-bottom:14px;letter-spacing:0.5px;}
-.moment-section p{font-size:0.85rem;color:var(--muted);line-height:1.75;margin-bottom:12px;}
-.moment-section p:last-child{margin-bottom:0;}
-.moment-section strong{color:var(--text);}
+.trust-strip{display:flex;justify-content:center;gap:1.6rem;flex-wrap:wrap;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:0.68rem;color:var(--muted);letter-spacing:0.5px;}
+.trust-item .icon{font-size:0.85rem;}
 
 /* ── REASONS SECTION ── */
-.reasons-section{width:100%;max-width:900px;margin:1rem auto 2.5rem;padding:0 1.5rem;text-align:left;}
+.reasons-section{width:100%;max-width:900px;margin:1.5rem auto 2.5rem;padding:0 1.5rem;text-align:left;}
 .reasons-title{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:var(--neon);text-align:center;margin-bottom:0.4rem;letter-spacing:2px;}
 .reasons-subtitle{text-align:center;font-size:0.72rem;color:var(--muted);letter-spacing:1px;margin-bottom:2rem;opacity:0.8;}
 .reasons-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:1.1rem;}
 .reason-card{position:relative;background:linear-gradient(160deg, var(--surface2) 0%, #241F38 100%);border:1px solid rgba(108,92,231,0.22);border-radius:14px;padding:1.5rem 1.5rem 1.5rem 1.4rem;display:flex;gap:1rem;align-items:flex-start;transition:transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;}
 .reason-card:hover{transform:translateY(-3px);border-color:rgba(108,92,231,0.5);box-shadow:0 10px 30px rgba(108,92,231,0.15);}
-.reason-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(108,92,231,0.15);border:1px solid rgba(108,92,231,0.4);color:var(--neon);font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.reason-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(108,92,231,0.15);border:1px solid rgba(108,92,231,0.4);color:var(--neon);font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:900;display:flex;align-items:center;justify-content:center;}
 .reason-body h3{font-family:'Orbitron',sans-serif;font-size:0.85rem;color:var(--text);margin-bottom:6px;letter-spacing:0.5px;}
 .reason-body p{font-size:0.75rem;color:var(--muted);line-height:1.6;}
 
@@ -138,25 +134,24 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 
 footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;font-size:0.62rem;color:var(--muted);letter-spacing:1px;}
 
-/* ── COUNTDOWN OVERLAY ── */
-.overlay{display:none;position:fixed;inset:0;background:rgba(10,8,16,0.96);backdrop-filter:blur(3px);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;padding:2rem;text-align:center;}
-.overlay.open{display:flex;}
-.countdown-ring{position:relative;width:140px;height:140px;}
-.countdown-ring svg{transform:rotate(-90deg);width:100%;height:100%;}
-.countdown-ring circle{fill:none;stroke-width:6;}
-.countdown-ring .track{stroke:rgba(255,255,255,0.08);}
-.countdown-ring .progress{stroke:var(--neon);stroke-linecap:round;transition:stroke-dashoffset 1s linear;}
-.countdown-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:2.6rem;font-weight:900;color:var(--text);}
-.overlay-label{font-size:0.68rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
-.overlay-tip{max-width:420px;font-size:0.78rem;color:var(--muted);line-height:1.6;min-height:2.6em;}
-.overlay-tip b{color:var(--neon2);}
+/* ── AD OVERLAY (skippable interstitial) ──
+   Given the highest z-index on the page so nothing (including any
+   future ad element) can ever render on top of it and block the
+   skip button. */
+.ad-overlay{display:none;position:fixed;inset:0;background:rgba(10,8,16,0.96);backdrop-filter:blur(3px);z-index:2147483000;align-items:center;justify-content:center;flex-direction:column;gap:18px;}
+.ad-overlay.open{display:flex;}
+.ad-overlay-box{width:min(90vw,640px);height:min(70vh,400px);background:linear-gradient(160deg,var(--surface2),#241F38);border:1px solid rgba(108,92,231,0.3);border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;box-shadow:0 20px 70px rgba(108,92,231,0.2);}
+.ad-overlay-skip{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:2px;padding:11px 26px;cursor:pointer;transition:all 0.15s;text-transform:uppercase;}
+.ad-overlay-skip:hover{border-color:var(--neon);color:var(--neon);}
+.ad-overlay-skip:disabled{opacity:0.4;cursor:not-allowed;}
+
+.mobile-ad-wrap{display:none;}
 
 @media (max-width:820px){
   .sidebar{display:none;}
   .enter-card{padding:3rem 1.8rem;border-radius:18px;}
   .enter-card h1{font-size:2.1rem;}
   .reasons-grid{grid-template-columns:1fr;}
-  .moment-section{padding:1.8rem 1.5rem;}
   .mobile-ad-wrap{display:block;padding:0 1.2rem 1.2rem;}
 }
 </style>
@@ -170,205 +165,180 @@ footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;
   </header>
 
   <div class="ad-top-wrap ad-block">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot ad-top">728×90</div>
+    <div class="ad-label">Advertisement</div>
+    <ins class="adsbygoogle ad-slot ad-top"
+         style="display:block"
+         data-ad-client="ca-pub-1150384056492176"
+         data-ad-slot="REPLACE_TOP_SLOT_ID"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
   </div>
 
   <div class="body-wrap">
     <div class="sidebar ad-block">
-      <div class="ad-label">Ad space reserved</div>
-      <div class="ad-slot sidebar-ad">160×600</div>
+      <div class="ad-label">Advertisement</div>
+      <ins class="adsbygoogle ad-slot sidebar-ad"
+           style="display:block"
+           data-ad-client="ca-pub-1150384056492176"
+           data-ad-slot="REPLACE_SIDEBAR_SLOT_ID"
+           data-ad-format="vertical"
+           data-full-width-responsive="true"></ins>
     </div>
 
     <div class="content-area">
-
       <div class="enter-card">
         <div class="enter-eyebrow">// Welcome back</div>
         <h1>Ready to play?</h1>
-        <p>This is your in-between moment — the few free minutes between one class and the next. Hit continue, and you're in.</p>
-        <button class="enter-btn" id="continue-btn" onclick="startCountdown()">▶ Continue</button>
-        <div class="enter-note">Loads in 5 seconds</div>
-      </div>
-
-      <div class="ad-block" style="width:100%;">
-        <div class="ad-label">Ad space reserved</div>
-        <div class="ad-slot ad-between">Responsive · 600×90</div>
-      </div>
-
-      <div class="moment-section">
-        <div class="moment-eyebrow">// The Philosophy</div>
-        <h2>What is "the in-between moment"?</h2>
-        <p>It's the five or ten minutes between the bell ringing and your next class starting. It's not free time to fill up your whole afternoon — it's a <strong>short, specific window</strong> that exists whether you use it or not.</p>
-        <p>DontSkipClass is built for exactly that window. Quick to load, quick to play, and easy to close the second the next bell rings. The goal was never to give you a reason to stay out longer — it's to make sure the time you already have doesn't go to waste.</p>
-        <p>Used right, a few minutes of a game between classes is a nice reset. Used wrong, "just five more minutes" turns into a habit of skipping the class itself — and that's the one thing this site was never meant to encourage.</p>
-      </div>
-
-      <div class="reasons-section" style="padding:0;">
-        <div class="reasons-title">// Why You Shouldn't Skip Class</div>
-        <div class="reasons-subtitle">A few honest reminders before you head out</div>
-
-        <div class="reasons-grid">
-          <div class="reason-card">
-            <div class="reason-num">01</div>
-            <div class="reason-body">
-              <h3>Missing Key Explanations</h3>
-              <p>Teachers often drop crucial hints about upcoming tests or break down complex problems in ways that textbooks just can't match.</p>
-            </div>
-          </div>
-
-          <div class="reason-card">
-            <div class="reason-num">02</div>
-            <div class="reason-body">
-              <h3>Snowballing Catch-Up Work</h3>
-              <p>Skipping one single class turns into spending hours later trying to track down notes and teach yourself from scratch.</p>
-            </div>
-          </div>
-
-          <div class="reason-card">
-            <div class="reason-num">03</div>
-            <div class="reason-body">
-              <h3>Attendance & Participation Points</h3>
-              <p>A lot of classes bake attendance directly into your grade. Skipping means throwing away free percentage points.</p>
-            </div>
-          </div>
-
-          <div class="reason-card">
-            <div class="reason-num">04</div>
-            <div class="reason-body">
-              <h3>Breaking the Routine</h3>
-              <p>Once you break the habit of showing up, it gets way easier to justify skipping the next time, leading straight into a slump.</p>
-            </div>
-          </div>
-
-          <div class="reason-card">
-            <div class="reason-num">05</div>
-            <div class="reason-body">
-              <h3>Losing Access to the Instructor</h3>
-              <p>Office hours and quick after-class questions are way easier to get when you're a familiar face who actually shows up.</p>
-            </div>
-          </div>
-
-          <div class="reason-card">
-            <div class="reason-num">06</div>
-            <div class="reason-body">
-              <h3>Group Work Fallout</h3>
-              <p>Missed classes often mean missed group assignments, leaving teammates to cover for you and hurting the trust you've built.</p>
-            </div>
-          </div>
+        <p>Tap continue to head inside. A quick ad helps keep everything on this site free.</p>
+        <button class="enter-btn" onclick="startInterstitial()">▶ Continue</button>
+        <div class="enter-note">You can skip the ad after a few seconds</div>
+        <div class="trust-strip">
+          <div class="trust-item"><span class="icon">🔒</span> No Sign Up</div>
+          <div class="trust-item"><span class="icon">⚡</span> Instant Load</div>
+          <div class="trust-item"><span class="icon">💸</span> Always Free</div>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="info-panel">
-          <h3>About DontSkipClass</h3>
-          <p>DontSkipClass is a free, no-signup break-time site — a quick distraction for the gaps in your school day that doesn't ask for an account, a subscription, or your personal info.</p>
-          <p>The reminders above aren't meant to lecture you. A few minutes of fun in the in-between moment is great — just make sure it stays in that moment.</p>
+  <div class="reasons-section">
+    <div class="reasons-title">// Why You Shouldn't Skip Class</div>
+    <div class="reasons-subtitle">A few reminders before you head out</div>
+
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div class="reason-num">📚</div>
+        <div class="reason-body">
+          <h3>Missing Key Explanations</h3>
+          <p>Teachers often drop crucial hints about upcoming tests or break down complex problems in ways that textbooks just can't match.</p>
         </div>
       </div>
 
+      <div class="reason-card">
+        <div class="reason-num">🔁</div>
+        <div class="reason-body">
+          <h3>Snowballing Catch-Up Work</h3>
+          <p>Skipping one single class turns into spending hours later trying to track down notes and teach yourself from scratch.</p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-num">🎯</div>
+        <div class="reason-body">
+          <h3>Attendance & Participation Points</h3>
+          <p>A lot of classes bake attendance directly into your grade. Skipping means throwing away free percentage points.</p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-num">🔄</div>
+        <div class="reason-body">
+          <h3>Breaking the Routine</h3>
+          <p>Once you break the habit of showing up, it gets way easier to justify skipping the next time, leading straight into a slump.</p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-num">🧑‍🏫</div>
+        <div class="reason-body">
+          <h3>Losing Access to the Instructor</h3>
+          <p>Office hours and quick after-class questions are way easier to get when you're a familiar face who actually shows up. Skip enough and that access quietly disappears.</p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-num">🤝</div>
+        <div class="reason-body">
+          <h3>Group Work Fallout</h3>
+          <p>Missed classes often mean missed group assignments or project updates, leaving teammates to cover for you and hurting the trust you've built with them.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad-block" style="width:100%;margin:2rem 0;">
+      <div class="ad-label">Advertisement</div>
+      <ins class="adsbygoogle ad-slot ad-between"
+           style="display:block;max-width:600px;margin:0 auto;"
+           data-ad-client="ca-pub-1150384056492176"
+           data-ad-slot="REPLACE_INCONTENT_SLOT_ID"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="info-panel">
+      <h3>About DontSkipClass</h3>
+      <p>DontSkipClass is a free, no-signup break-time site built for the in-between moments of the school day — a quick distraction that doesn't ask for an account, a subscription, or your personal info. Everything here runs entirely in your browser, and the small ads you see are what keep it free to use.</p>
+      <p>The reminders above aren't meant to lecture you — they're just honest nudges. A few minutes of fun between classes is great; just make sure it doesn't turn into skipping the class itself.</p>
     </div>
   </div>
 
   <div class="mobile-ad-wrap ad-block">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot" style="height:250px;">300×250</div>
+    <div class="ad-label">Advertisement</div>
+    <ins class="adsbygoogle ad-slot"
+         style="display:block;height:250px"
+         data-ad-client="ca-pub-1150384056492176"
+         data-ad-slot="REPLACE_MOBILE_SLOT_ID"
+         data-ad-format="rectangle"
+         data-full-width-responsive="true"></ins>
   </div>
 
   <div class="ad-footer-wrap ad-block">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot ad-footer">728×90</div>
+    <div class="ad-label">Advertisement</div>
+    <ins class="adsbygoogle ad-slot ad-footer"
+         style="display:block"
+         data-ad-client="ca-pub-1150384056492176"
+         data-ad-slot="REPLACE_FOOTER_SLOT_ID"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
   </div>
 
   <footer>ALWAYS FREE · NO SIGN UP · &copy; 2026</footer>
 </div>
 
-<!-- Countdown overlay (no ad content yet — just the buffer) -->
-<div class="overlay" id="overlay">
-  <div class="overlay-label">Loading your game</div>
-  <div class="countdown-ring">
-    <svg viewBox="0 0 140 140">
-      <circle class="track" cx="70" cy="70" r="60"></circle>
-      <circle class="progress" id="ring-progress" cx="70" cy="70" r="60"
-              stroke-dasharray="377" stroke-dashoffset="0"></circle>
-    </svg>
-    <div class="countdown-num" id="countdown-num">5</div>
-  </div>
-  <div class="overlay-tip" id="overlay-tip"></div>
+<!-- Skippable interstitial ad, shown on "Continue" -->
+<div class="ad-overlay" id="ad-overlay">
+  <div class="ad-label">Advertisement</div>
+  <div class="ad-overlay-box" id="ad-overlay-box">[ INTERSTITIAL AD ]</div>
+  <button class="ad-overlay-skip" id="skip-btn" disabled onclick="finishInterstitial()">Skip in 5</button>
 </div>
 
 <script>
-const TOTAL_SECONDS = 5;
-const RING_CIRCUMFERENCE = 2 * Math.PI * 60; // matches r=60 above
-
-const TIPS = [
-  'Tip: teachers remember who shows up — it pays off later.',
-  'Tip: five minutes here, back in your seat before the bell.',
-  'Tip: missed notes are way harder to recover than five minutes of fun.',
-  'Tip: this games list only takes a few seconds to load. No sign up, ever.',
-  'Tip: attendance points add up fast — don\'t give away free grade.'
-];
-
-let countdownTimer = null;
-let pendingWindow = null;
-
-function startCountdown(){
-  const btn = document.getElementById('continue-btn');
-  btn.disabled = true;
-
-  // Open the destination tab RIGHT NOW, synchronously, inside this real
-  // click event — browsers reliably allow this because it's tied directly
-  // to user action. It stays blank until the countdown below finishes,
-  // so visually nothing changes: the tab still only shows content after
-  // the 5 seconds are up.
-  pendingWindow = window.open('about:blank', '_blank');
-
-  const overlay = document.getElementById('overlay');
-  const numEl = document.getElementById('countdown-num');
-  const ringEl = document.getElementById('ring-progress');
-  const tipEl = document.getElementById('overlay-tip');
-
+function startInterstitial(){
+  const overlay = document.getElementById('ad-overlay');
+  const skipBtn = document.getElementById('skip-btn');
   overlay.classList.add('open');
-  tipEl.textContent = TIPS[Math.floor(Math.random()*TIPS.length)];
-
-  let secondsLeft = TOTAL_SECONDS;
-  numEl.textContent = secondsLeft;
-  ringEl.style.strokeDasharray = RING_CIRCUMFERENCE;
-  ringEl.style.strokeDashoffset = 0;
-
-  countdownTimer = setInterval(()=>{
+  let secondsLeft = 5;
+  skipBtn.textContent = `Skip in ${secondsLeft}`;
+  const timer = setInterval(()=>{
     secondsLeft--;
     if(secondsLeft <= 0){
-      clearInterval(countdownTimer);
-      finishCountdown();
+      clearInterval(timer);
+      skipBtn.disabled = false;
+      skipBtn.textContent = 'Skip ▶';
     } else {
-      numEl.textContent = secondsLeft;
-      const progress = (TOTAL_SECONDS - secondsLeft) / TOTAL_SECONDS;
-      ringEl.style.strokeDashoffset = RING_CIRCUMFERENCE * progress;
-      if(secondsLeft === Math.ceil(TOTAL_SECONDS/2)){
-        tipEl.textContent = TIPS[Math.floor(Math.random()*TIPS.length)];
-      }
+      skipBtn.textContent = `Skip in ${secondsLeft}`;
     }
   }, 1000);
 }
 
-function finishCountdown(){
-  const overlay = document.getElementById('overlay');
-  overlay.classList.remove('open');
-
-  // The tab was already opened (blank) back when Continue was clicked.
-  // Now, once the countdown is done, fill it in with the notes.html iframe.
-  if(pendingWindow && !pendingWindow.closed){
-    pendingWindow.document.open();
-    pendingWindow.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="notes.html"></iframe></body></html>');
-    pendingWindow.document.close();
+function finishInterstitial(){
+  const win = window.open('about:blank', '_blank');
+  if(win){
+    win.document.open();
+    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="notes.html"></iframe></body></html>');
+    win.document.close();
   } else {
-    // Popup was blocked or the user closed the tab early — fall back to
-    // a same-tab redirect so they still get to notes.html either way.
+    // Popup blocked — fall back to a normal same-tab redirect
     window.location.href = 'notes.html';
   }
-
-  // Reset button in case the user comes back to this tab
-  const btn = document.getElementById('continue-btn');
-  btn.disabled = false;
 }
+
+// Request each manual ad unit once the page loads (needed for real ads to render)
+window.addEventListener('load', ()=>{
+  document.querySelectorAll('ins.adsbygoogle').forEach(()=>{
+    try{ (adsbygoogle = window.adsbygoogle || []).push({}); }catch(e){}
+  });
+});
 </script>
 </body>
 </html>
