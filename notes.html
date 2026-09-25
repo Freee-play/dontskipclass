@@ -99,9 +99,9 @@ main{padding:1rem 1.5rem;}
 .thumb-emoji{font-size:2.8rem;position:relative;z-index:1;}
 .card-cat-badge{position:absolute;top:9px;left:9px;z-index:6;background:var(--neon);color:#ffffff;font-size:0.58rem;font-weight:800;letter-spacing:0.3px;text-transform:capitalize;padding:4px 10px;border-radius:999px;}
 .card-name-overlay{position:absolute;left:9px;right:9px;bottom:7px;z-index:2;font-size:0.85rem;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 3px rgba(0,0,0,0.6);}
-.persistent-play-btn{position:absolute;bottom:9px;right:9px;z-index:5;background:var(--neon);color:#fff;border:none;border-radius:999px;padding:6px 13px;font-size:0.62rem;font-weight:800;letter-spacing:0.3px;cursor:pointer;box-shadow:0 3px 10px rgba(79,142,255,0.45);transition:background 0.15s,transform 0.15s;animation:play-pulse 2.4s ease-in-out infinite;}
-@keyframes play-pulse{0%,100%{box-shadow:0 3px 10px rgba(79,142,255,0.45);}50%{box-shadow:0 3px 18px rgba(79,142,255,0.75);}}
-.persistent-play-btn:hover{background:#2f6fe0;transform:translateY(-1px);}
+.persistent-play-btn{position:absolute;bottom:9px;right:9px;z-index:5;background:var(--neon);color:#fff;border:none;border-radius:999px;padding:6px 13px;font-size:0.62rem;font-weight:800;letter-spacing:0.3px;cursor:pointer;box-shadow:0 3px 10px rgba(79,142,255,0.45);transition:background 0.15s;animation:play-pulse 2.4s ease-in-out infinite;will-change:transform;}
+@keyframes play-pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.persistent-play-btn:hover{background:#2f6fe0;animation-play-state:paused;transform:translateY(-1px) scale(1.08);}
 .card-footer{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;}
 .card-title{font-size:0.82rem;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .card-info{display:none;}
