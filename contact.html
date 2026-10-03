@@ -67,7 +67,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
   <p class="note">This opens a pre-filled email in your mail app. Nothing is sent until you hit send there.</p>
 </form>
 
-<p class="note" style="margin-top:1.5rem">Prefer to write it yourself? Email <a href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a>.</p>
+<p class="note" style="margin-top:1.5rem">Prefer to write it yourself? Email <a href="mailto:dontskipclass.com@gmail.com">dontskipclass.com@gmail.com</a>.</p>
 </main>
 <footer>
   <nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
@@ -79,7 +79,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e){
   var name = document.getElementById('name').value.trim();
   var msg = document.getElementById('message').value.trim();
   var body = (name ? 'From: ' + name + '\n\n' : '') + msg;
-  window.location.href = 'mailto:YOUR_EMAIL@example.com?subject=' + encodeURIComponent('DontSkipClass message') + '&body=' + encodeURIComponent(body);
+  window.location.href = 'mailto:dontskipclass.com@gmail.com?subject=' + encodeURIComponent('DontSkipClass message') + '&body=' + encodeURIComponent(body);
 });
 </script>
 </body>
