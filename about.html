@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17151F">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+<title>About — DontSkipClass</title>
+<meta name="description" content="What DontSkipClass is and why it exists.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#17151F;--surface:#201D2E;--surface2:#2A2640;--border:rgba(255,255,255,0.08);--neon:#8C7AFF;--neon2:#FF8A65;--text:#F1EFFA;--muted:#9691B8;}
+body{font-family:'Space Mono',monospace;background:radial-gradient(circle at 20% 0%,rgba(140,122,255,0.08) 0%,transparent 45%),radial-gradient(circle at 85% 15%,rgba(255,138,101,0.05) 0%,transparent 40%),var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.7;}
+header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(140,122,255,0.06) 0%,transparent 100%);text-align:center;}
+.logo{display:inline-block;text-decoration:none;font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:6px;color:var(--neon);text-shadow:0 0 20px rgba(140,122,255,0.35);}
+.tagline{font-size:0.72rem;color:var(--muted);letter-spacing:3px;margin-top:6px;text-transform:uppercase;}
+main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:3rem 1.5rem 4rem;}
+h1{font-family:'Orbitron',sans-serif;font-size:2rem;line-height:1.2;margin-bottom:.8rem;}
+.lede{color:var(--muted);font-size:1rem;margin-bottom:2rem;}
+h2{font-family:'Orbitron',sans-serif;font-size:1.05rem;color:var(--neon);margin:2.2rem 0 .6rem;letter-spacing:.5px;}
+p,li{font-size:.92rem;color:var(--muted);}
+p{margin-bottom:1rem;}
+ul{margin-bottom:1rem;}
+li{margin:0 0 .5rem 1.2rem;}
+strong{color:var(--text);}
+main a{color:var(--neon2);}
+form{background:var(--surface2);border:1px solid rgba(140,122,255,0.2);border-radius:14px;padding:1.5rem;margin-top:1.5rem;}
+label{display:block;font-size:.85rem;color:var(--text);margin-bottom:.4rem;}
+input,textarea{width:100%;font:inherit;font-size:.9rem;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.7rem .8rem;margin-bottom:1.1rem;}
+textarea{min-height:140px;resize:vertical;}
+.btn{font-family:inherit;font-weight:700;font-size:.9rem;letter-spacing:1px;color:var(--neon);background:rgba(140,122,255,.15);border:2px solid var(--neon);border-radius:10px;padding:.8rem 1.6rem;cursor:pointer;transition:background .2s;}
+.btn:hover{background:rgba(140,122,255,.3);}
+.note{font-size:.8rem;margin-top:1rem;margin-bottom:0;opacity:.85;}
+footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;font-size:.72rem;color:var(--muted);letter-spacing:1px;}
+@media (max-width:600px){.logo{font-size:1.4rem;letter-spacing:3px;}h1{font-size:1.6rem;}main{padding-top:2rem;}}
+
+.site-nav{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-top:.9rem}
+.site-nav a{color:var(--muted);text-decoration:none;font-size:.8rem;padding:.35rem .9rem;border-radius:999px;border:1px solid transparent;transition:color .2s,border-color .2s}
+.site-nav a:hover{color:var(--text);border-color:var(--border)}
+.site-nav a[aria-current="page"]{color:var(--neon);border-color:rgba(140,122,255,.35);background:rgba(140,122,255,.08)}
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:2px solid var(--neon2);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.footer-links{display:flex;justify-content:center;gap:1.4rem;margin-bottom:.7rem}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.8rem}
+.footer-links a:hover{color:var(--neon)}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html">DontSkipClass</a>
+  <div class="tagline">Always Free · No Sign Up</div>
+  <nav class="site-nav" aria-label="Main"><a href="index.html">Home</a><a href="about.html" aria-current="page">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
+</header>
+<main>
+<h1>About DontSkipClass</h1>
+<p class="lede">A free, no-signup site for the few minutes between one class and the next.</p>
+
+<h2>What it is</h2>
+<p>DontSkipClass is a small break-time games site. There are no accounts, no subscriptions, and nothing to download. You open it, hit continue, and you're in.</p>
+
+<h2>The in-between moment</h2>
+<p>The site is built around one idea: the short window between the bell and your next class. Long enough to reset your head, short enough that you're back in your seat on time.</p>
+<p>That's also why the loading screen has a countdown and a few reminders in it. A quick game is a good break. An open-ended one is how people end up skipping the class itself, and this site was never meant to encourage that.</p>
+
+<h2>Who it's for</h2>
+<p>It's made by one person for a group of friends. It's free, it isn't trying to sell you anything, and it doesn't ask for your personal information.</p>
+
+<h2>Get in touch</h2>
+<p>Found a bug, or have a game idea? Use the <a href="contact.html">contact page</a>.</p>
+</main>
+<footer>
+  <nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
+  <div>Always free · No sign up · &copy; 2026</div>
+</footer>
+</body>
+</html>
