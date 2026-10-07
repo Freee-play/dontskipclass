@@ -32,7 +32,7 @@ body{
 .page{display:flex;flex-direction:column;min-height:100vh;}
 
 
-/* ── AD SLOTS ── */
+/* ── AD PLACEHOLDER SLOTS (optimized) ── */
 .ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;}
 .ad-slot{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;width:100%;}
 .ad-label{font-size:0.6rem;letter-spacing:2px;color:var(--muted);opacity:0.65;text-align:center;text-transform:uppercase;}
@@ -45,9 +45,6 @@ body{
 .mobile-ad-wrap{display:none;}
 .sidebar{width:180px;flex-shrink:0;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:flex-start;}
 .overlay-ad{width:min(300px,100%);}
-.ad-live{display:flex;align-items:center;justify-content:center;max-width:100%;overflow:hidden;}
-.ad-live-728{width:728px;height:90px;}
-.ad-live-300{width:300px;height:250px;}
 .overlay-ad .ad-slot{height:250px;}
 @media (max-height:700px){.overlay-ad .ad-slot{height:100px;}}
 
@@ -149,9 +146,8 @@ header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);backgrou
 footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;font-size:0.72rem;color:var(--muted);letter-spacing:1px;}
 
 /* ── COUNTDOWN OVERLAY ── */
-.overlay{display:none;position:fixed;inset:0;overflow-y:auto;background:rgba(10,8,16,0.96);backdrop-filter:blur(3px);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;padding:2rem;text-align:center;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(10,8,16,0.96);backdrop-filter:blur(3px);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;padding:2rem;text-align:center;}
 .overlay.open{display:flex;}
-@media (max-height:700px){.overlay{gap:12px;padding:1rem;justify-content:flex-start;}}
 .countdown-ring{position:relative;width:140px;height:140px;}
 .countdown-ring svg{transform:rotate(-90deg);width:100%;height:100%;}
 .countdown-ring circle{fill:none;stroke-width:6;}
@@ -163,7 +159,6 @@ footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;
 .overlay-tip b{color:var(--neon2);}
 
 @media (max-width:820px){
-  .ad-top-wrap,.ad-footer-wrap{display:none;}
   .sidebar{display:none;}
   .mobile-ad-wrap{display:block;padding:0 1.2rem 1.2rem;}
   .enter-card{padding:3rem 1.8rem;border-radius:18px;}
@@ -184,14 +179,6 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
 .overlay-cancel{background:none;border:1px solid var(--border);color:var(--muted);font-family:inherit;font-size:.8rem;padding:.6rem 1.4rem;border-radius:10px;cursor:pointer}
 .overlay-cancel:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
 </style>
-<script>
-/* Loads one bauval.org banner at the spot where this function is called. */
-function dscAd(key,w,h){
-  window.atOptions={'key':key,'format':'iframe','height':h,'width':w,'params':{}};
-  document.write('<scr'+'ipt src="https://bauval.org/22/'+key+'"></scr'+'ipt>');
-}
-function dscIsMobile(){return window.matchMedia('(max-width:820px)').matches;}
-</script>
 </head>
 <body>
 <div class="page">
@@ -202,16 +189,22 @@ function dscIsMobile(){return window.matchMedia('(max-width:820px)').matches;}
     <nav class="site-nav" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
   </header>
 
+  <!-- OPTIMIZED AD SLOT: Top Banner -->
   <div class="ad-top-wrap ad-block">
     <div class="ad-label">Advertisement</div>
-    <div class="ad-live ad-live-728"><script>if(!dscIsMobile())dscAd('de05556ab6067ca540e0b224268ebe22',728,90);</script></div>
+    <div class="ad-slot ad-top">
+      <!-- Paste your Adsterra 728x90 banner script here -->
+    </div>
   </div>
 
   <div class="body-wrap">
+    <!-- OPTIMIZED AD SLOT: Sidebar sticky -->
     <div class="sidebar ad-block">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot sidebar-ad">160×600</div>
-  </div>
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-slot sidebar-ad">
+        <!-- Paste your Adsterra 160x600 banner script here -->
+      </div>
+    </div>
 
     <div class="content-area">
 
@@ -223,10 +216,13 @@ function dscIsMobile(){return window.matchMedia('(max-width:820px)').matches;}
         <div class="enter-note">Loads in 5 seconds</div>
       </div>
 
+      <!-- OPTIMIZED AD SLOT: In-between content box -->
       <div class="ad-block" style="width:100%;">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot ad-between">Responsive · 600×90</div>
-  </div>
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-slot ad-between">
+          <!-- Paste your Adsterra banner/responsive tag here -->
+        </div>
+      </div>
 
       <div class="moment-section">
         <div class="moment-eyebrow">// The Philosophy</div>
@@ -309,10 +305,13 @@ function dscIsMobile(){return window.matchMedia('(max-width:820px)').matches;}
             <p>The catch, and it's an important one, is the word <em>short</em>. The research backing all of this is about brief resets, not extended breaks — the benefit curve doesn't keep climbing the longer you stay away. That's the whole idea behind the in-between moment this site is built around: long enough to actually reset, short enough that you're back in your seat when the bell rings.</p>
           </div>
 
+          <!-- OPTIMIZED AD SLOT: Mid-Article Banner -->
           <div class="ad-block" style="width:100%;margin:1.8rem 0;">
-    <div class="ad-label">Advertisement</div>
-    <div class="ad-slot ad-between">Responsive · 600×90</div>
-  </div>
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-slot ad-between">
+              <!-- Paste your Adsterra responsive banner script here -->
+            </div>
+          </div>
 
           <div class="article-block">
             <h3>How to Take a Break Without It Turning Into Skipping Class</h3>
@@ -337,14 +336,20 @@ function dscIsMobile(){return window.matchMedia('(max-width:820px)').matches;}
     </div>
   </div>
 
+  <!-- OPTIMIZED AD SLOT: Mobile View Banner -->
   <div class="mobile-ad-wrap ad-block">
     <div class="ad-label">Advertisement</div>
-    <div class="ad-live ad-live-300"><script>if(dscIsMobile())dscAd('96417e96d867dfa9320f915070947cbc',300,250);</script></div>
+    <div class="ad-slot" style="height:250px;">
+      <!-- Paste your Adsterra 300x250 script here -->
+    </div>
   </div>
 
+  <!-- OPTIMIZED AD SLOT: Footer Banner -->
   <div class="ad-footer-wrap ad-block">
     <div class="ad-label">Advertisement</div>
-    <div class="ad-live ad-live-728"><script>if(!dscIsMobile())dscAd('de05556ab6067ca540e0b224268ebe22',728,90);</script></div>
+    <div class="ad-slot ad-footer">
+      <!-- Paste your Adsterra 728x90 script here -->
+    </div>
   </div>
 
   <footer>
@@ -353,7 +358,7 @@ function dscIsMobile(){return window.matchMedia('(max-width:820px)').matches;}
   </footer>
 </div>
 
-<!-- Countdown overlay (shown after pressing Play; includes an ad slot) -->
+<!-- Countdown overlay (includes an ad slot) -->
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Loading your game">
   <div class="overlay-label">Loading your game</div>
   <div class="countdown-ring">
@@ -365,9 +370,13 @@ function dscIsMobile(){return window.matchMedia('(max-width:820px)').matches;}
     <div class="countdown-num" id="countdown-num">5</div>
   </div>
   <div class="overlay-tip" id="overlay-tip"></div>
+  
+  <!-- OPTIMIZED AD SLOT: Countdown Overlay Box -->
   <div class="overlay-ad ad-block">
     <div class="ad-label">Advertisement</div>
-    <div class="ad-live ad-live-300"><script>dscAd('96417e96d867dfa9320f915070947cbc',300,250);</script></div>
+    <div class="ad-slot">
+      <!-- Paste your Adsterra 300x250 script here -->
+    </div>
   </div>
   <button class="overlay-cancel" onclick="cancelCountdown()">Cancel</button>
 </div>
@@ -452,6 +461,8 @@ function finishCountdown(){
   btn.disabled = false;
 }
 </script>
+
+<!-- Adsterra Social Bar Script Integration -->
 <script data-cfasync="false" src="https://bauval.org/14/b92ebb010b90a122e2705cb021018b63"></script>
 </body>
 </html>
