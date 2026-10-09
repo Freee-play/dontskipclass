@@ -32,7 +32,7 @@ body{
 .page{display:flex;flex-direction:column;min-height:100vh;}
 
 /* ── AD CONTAINER STYLES ── */
-.ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;margin:0 auto;}
+.ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;margin:0 auto;width:100%;}
 .ad-slot{
   background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
   border:1px dashed rgba(255,255,255,0.12);
@@ -47,31 +47,30 @@ body{
   text-align:center;
   overflow:hidden;
 }
+.ad-slot iframe{border:0;outline:none;background:transparent;max-width:100%;}
 .ad-label{font-size:0.6rem;letter-spacing:2px;color:var(--muted);opacity:0.65;text-align:center;text-transform:uppercase;}
 
-/* Header Ad */
-.ad-top-wrap{padding:0.8rem 1rem 0;width:100%;}
-.ad-top-desktop{width:728px;height:90px;}
-.ad-top-mobile{display:none;width:320px;height:50px;}
+/* Header & Footer Ads */
+.ad-top-wrap{padding:0.8rem 1rem 0;}
+.ad-top-desktop{width:728px;min-height:90px;}
+.ad-footer-wrap{padding:0 1rem 1.4rem;margin-top:0.4rem;}
+.ad-footer{width:728px;min-height:90px;}
 
 /* In-Content Ads */
-.ad-between{width:100%;max-width:728px;min-height:90px;margin:2rem auto;}
-.ad-footer-wrap{padding:0 1rem 1.4rem;margin-top:0.4rem;width:100%;}
-.ad-footer{width:728px;height:90px;}
+.ad-between{width:100%;max-width:728px;margin:2rem auto;}
 
 /* Sidebar Ad */
-.sidebar{width:190px;flex-shrink:0;padding:1.5rem 0.5rem;display:flex;flex-direction:column;align-items:center;}
-.sidebar-ad{width:160px;height:600px;position:sticky;top:1rem;}
+.sidebar{width:180px;flex-shrink:0;padding:1.5rem 0.5rem;display:flex;flex-direction:column;align-items:center;}
+.sidebar-ad{width:160px;min-height:600px;position:sticky;top:1rem;}
 
-/* Mobile & Overlay */
+/* Mobile & Overlay Ads */
 .mobile-ad-wrap{display:none;}
 .overlay-ad{width:min(300px,100%);}
-.overlay-ad .ad-slot{width:300px;height:250px;}
+.overlay-ad .ad-slot{width:300px;min-height:250px;}
 
 @media (max-width:820px){
   .sidebar{display:none;}
-  .ad-top-desktop, .ad-footer{display:none;}
-  .ad-top-mobile{display:flex;}
+  .ad-top-desktop, .ad-footer{width:100%;max-width:468px;}
   .mobile-ad-wrap{display:flex;padding:0 1.2rem 1.2rem;}
   .enter-card{padding:3rem 1.8rem;border-radius:18px;}
   .enter-card h1{font-size:2.1rem;}
@@ -202,8 +201,8 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
 .overlay-cancel:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
 </style>
 
-<!-- Adsterra Social Bar / Popunder Scripts Placeholders (Optional higher CPM formats) -->
-<!-- <script type='text/javascript' src='//your-popunder-url.com/key.js'></script> -->
+<!-- Adsterra Global Script -->
+<script data-cfasync="false" src="https://bauval.org/14/b92ebb010b90a122e2705cb021018b63"></script>
 
 </head>
 <body>
@@ -215,52 +214,20 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
     <nav class="site-nav" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
   </header>
 
-  <!-- TOP HEADER AD -->
+  <!-- TOP HEADER AD (728x90) -->
   <div class="ad-top-wrap ad-block">
     <div class="ad-label">Advertisement</div>
-    <!-- Desktop Banner (728x90) -->
     <div class="ad-slot ad-top-desktop">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'YOUR_ADSTERRA_728x90_KEY',
-          'format' : 'iframe',
-          'height' : 90,
-          'width' : 728,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/YOUR_ADSTERRA_728x90_KEY/invoke.js"></script>
-    </div>
-    <!-- Mobile Banner (320x50) -->
-    <div class="ad-slot ad-top-mobile">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'YOUR_ADSTERRA_320x50_KEY',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/YOUR_ADSTERRA_320x50_KEY/invoke.js"></script>
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'de05556ab6067ca540e0b224268ebe22','format':'iframe','height':90,'width':728,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/de05556ab6067ca540e0b224268ebe22'></script></body></html>" width="728" height="90" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 
   <div class="body-wrap">
-    <!-- SIDEBAR STICKY AD (Desktop Wide Skyscraper 160x600) -->
+    <!-- SIDEBAR AD (468x60 / Placeholder Slot) -->
     <div class="sidebar ad-block">
       <div class="ad-label">Advertisement</div>
       <div class="ad-slot sidebar-ad">
-        <script type="text/javascript">
-          atOptions = {
-            'key' : 'YOUR_ADSTERRA_160x600_KEY',
-            'format' : 'iframe',
-            'height' : 600,
-            'width' : 160,
-            'params' : {}
-          };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/YOUR_ADSTERRA_160x600_KEY/invoke.js"></script>
+        <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'92e8bd40a5c52080d73e536dd322bebb','format':'iframe','height':60,'width':468,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/92e8bd40a5c52080d73e536dd322bebb'></script></body></html>" width="100%" height="60" frameborder="0" scrolling="no"></iframe>
       </div>
     </div>
 
@@ -274,20 +241,11 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
         <div class="enter-note">Loads in 5 seconds</div>
       </div>
 
-      <!-- IN-CONTENT AD (728x90 or Native Banner) -->
+      <!-- IN-CONTENT AD 1 (728x90) -->
       <div class="ad-block ad-between">
         <div class="ad-label">Advertisement</div>
         <div class="ad-slot" style="width:100%;min-height:90px;">
-          <script type="text/javascript">
-            atOptions = {
-              'key' : 'YOUR_ADSTERRA_728x90_KEY_2',
-              'format' : 'iframe',
-              'height' : 90,
-              'width' : 728,
-              'params' : {}
-            };
-          </script>
-          <script type="text/javascript" src="//www.highperformanceformat.com/YOUR_ADSTERRA_728x90_KEY_2/invoke.js"></script>
+          <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'de05556ab6067ca540e0b224268ebe22','format':'iframe','height':90,'width':728,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/de05556ab6067ca540e0b224268ebe22'></script></body></html>" width="728" height="90" frameborder="0" scrolling="no"></iframe>
         </div>
       </div>
 
@@ -372,20 +330,11 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
             <p>The catch, and it's an important one, is the word <em>short</em>. The research backing all of this is about brief resets, not extended breaks — the benefit curve doesn't keep climbing the longer you stay away. That's the whole idea behind the in-between moment this site is built around: long enough to actually reset, short enough that you're back in your seat when the bell rings.</p>
           </div>
 
-          <!-- ARTICLE BREAK AD SLOT -->
+          <!-- IN-CONTENT AD 2 (468x60 Banner) -->
           <div class="ad-block ad-between">
             <div class="ad-label">Advertisement</div>
-            <div class="ad-slot" style="width:100%;min-height:90px;">
-              <script type="text/javascript">
-                atOptions = {
-                  'key' : 'YOUR_ADSTERRA_728x90_KEY_3',
-                  'format' : 'iframe',
-                  'height' : 90,
-                  'width' : 728,
-                  'params' : {}
-                };
-              </script>
-              <script type="text/javascript" src="//www.highperformanceformat.com/YOUR_ADSTERRA_728x90_KEY_3/invoke.js"></script>
+            <div class="ad-slot" style="width:100%;min-height:60px;">
+              <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'92e8bd40a5c52080d73e536dd322bebb','format':'iframe','height':60,'width':468,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/92e8bd40a5c52080d73e536dd322bebb'></script></body></html>" width="468" height="60" frameborder="0" scrolling="no"></iframe>
             </div>
           </div>
 
@@ -416,33 +365,15 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
   <div class="mobile-ad-wrap ad-block">
     <div class="ad-label">Advertisement</div>
     <div class="ad-slot" style="width:300px;height:250px;">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'YOUR_ADSTERRA_300x250_KEY_MOBILE',
-          'format' : 'iframe',
-          'height' : 250,
-          'width' : 300,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/YOUR_ADSTERRA_300x250_KEY_MOBILE/invoke.js"></script>
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'96417e96d867dfa9320f915070947cbc','format':'iframe','height':250,'width':300,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/96417e96d867dfa9320f915070947cbc'></script></body></html>" width="300" height="250" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 
-  <!-- FOOTER AD -->
+  <!-- FOOTER AD (728x90) -->
   <div class="ad-footer-wrap ad-block">
     <div class="ad-label">Advertisement</div>
     <div class="ad-slot ad-footer">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'YOUR_ADSTERRA_728x90_KEY_FOOTER',
-          'format' : 'iframe',
-          'height' : 90,
-          'width' : 728,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/YOUR_ADSTERRA_728x90_KEY_FOOTER/invoke.js"></script>
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'de05556ab6067ca540e0b224268ebe22','format':'iframe','height':90,'width':728,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/de05556ab6067ca540e0b224268ebe22'></script></body></html>" width="728" height="90" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 
@@ -452,7 +383,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
   </footer>
 </div>
 
-<!-- Countdown Overlay Modal Ad -->
+<!-- Countdown Overlay Modal Ad (300x250) -->
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Loading your game">
   <div class="overlay-label">Loading your game</div>
   <div class="countdown-ring">
@@ -467,16 +398,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
   <div class="overlay-ad ad-block">
     <div class="ad-label">Advertisement</div>
     <div class="ad-slot" style="width:300px;height:250px;">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'YOUR_ADSTERRA_300x250_KEY_OVERLAY',
-          'format' : 'iframe',
-          'height' : 250,
-          'width' : 300,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/YOUR_ADSTERRA_300x250_KEY_OVERLAY/invoke.js"></script>
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'96417e96d867dfa9320f915070947cbc','format':'iframe','height':250,'width':300,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/96417e96d867dfa9320f915070947cbc'></script></body></html>" width="300" height="250" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
   <button class="overlay-cancel" onclick="cancelCountdown()">Cancel</button>
