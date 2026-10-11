@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,21 +32,20 @@ body{
 .page{display:flex;flex-direction:column;min-height:100vh;}
 
 
-/* ── AD PLACEHOLDER SLOTS (static, no scripts) ── */
+/* ── AD PLACEHOLDER SLOTS ── */
 .ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;}
-.ad-slot{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;width:100%;}
+.ad-slot{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;width:100%;overflow:hidden;}
 .ad-label{font-size:0.6rem;letter-spacing:2px;color:var(--muted);opacity:0.65;text-align:center;text-transform:uppercase;}
 .ad-top-wrap{padding:0.8rem 2rem 0;}
-.ad-top{height:90px;}
-.ad-between{height:90px;margin-top:2.2rem;max-width:600px;margin-left:auto;margin-right:auto;}
-.ad-footer{height:90px;}
+.ad-top{min-height:90px;}
+.ad-between{min-height:90px;margin-top:2.2rem;max-width:600px;margin-left:auto;margin-right:auto;}
+.ad-footer{min-height:90px;}
 .ad-footer-wrap{padding:0 2rem 1.4rem;margin-top:0.4rem;}
-.sidebar-ad{height:500px;position:sticky;top:1rem;}
+.sidebar-ad{min-height:500px;position:sticky;top:1rem;}
 .mobile-ad-wrap{display:none;}
 .sidebar{width:180px;flex-shrink:0;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:flex-start;}
 .overlay-ad{width:min(300px,100%);}
-.overlay-ad .ad-slot{height:250px;}
-@media (max-height:700px){.overlay-ad .ad-slot{height:100px;}}
+.overlay-ad .ad-slot{min-height:250px;}
 
 header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(140,122,255,0.06) 0%,transparent 100%);text-align:center;}
 .logo{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:6px;color:var(--neon);text-shadow:0 0 20px rgba(140,122,255,0.35);}
@@ -183,6 +180,9 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
 </style>
 </head>
 <body>
+<!-- Global async ad script -->
+<script data-cfasync="false" src="https://bauval.org/14/b92ebb010b90a122e2705cb021018b63"></script>
+
 <div class="page">
 
   <header>
@@ -191,16 +191,40 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
     <nav class="site-nav" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
   </header>
 
+  <!-- Top Ad Slot: 728x90 -->
   <div class="ad-top-wrap ad-block">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot ad-top">728×90</div>
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot ad-top">
+      <script>
+        atOptions = {
+          'key' : 'de05556ab6067ca540e0b224268ebe22',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://bauval.org/22/de05556ab6067ca540e0b224268ebe22"></script>
+    </div>
   </div>
 
   <div class="body-wrap">
+    <!-- Sidebar Ad Slot: 300x250 (adapted to fit your 300x250 ad script code nicely in the sidebar) -->
     <div class="sidebar ad-block">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot sidebar-ad">160×600</div>
-  </div>
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-slot sidebar-ad" style="min-height:250px;">
+        <script>
+          atOptions = {
+            'key' : '96417e96d867dfa9320f915070947cbc',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+          };
+        </script>
+        <script src="https://bauval.org/22/96417e96d867dfa9320f915070947cbc"></script>
+      </div>
+    </div>
 
     <div class="content-area">
 
@@ -212,10 +236,22 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
         <div class="enter-note">Loads in 5 seconds</div>
       </div>
 
+      <!-- In-Between Ad Slot: 468x60 -->
       <div class="ad-block" style="width:100%;">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot ad-between">Responsive · 600×90</div>
-  </div>
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-slot ad-between">
+          <script>
+            atOptions = {
+              'key' : '92e8bd40a5c52080d73e536dd322bebb',
+              'format' : 'iframe',
+              'height' : 60,
+              'width' : 468,
+              'params' : {}
+            };
+          </script>
+          <script src="https://bauval.org/22/92e8bd40a5c52080d73e536dd322bebb"></script>
+        </div>
+      </div>
 
       <div class="moment-section">
         <div class="moment-eyebrow">// The Philosophy</div>
@@ -298,11 +334,6 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
             <p>The catch, and it's an important one, is the word <em>short</em>. The research backing all of this is about brief resets, not extended breaks — the benefit curve doesn't keep climbing the longer you stay away. That's the whole idea behind the in-between moment this site is built around: long enough to actually reset, short enough that you're back in your seat when the bell rings.</p>
           </div>
 
-          <div class="ad-block" style="width:100%;margin:1.8rem 0;">
-    <div class="ad-label">Advertisement</div>
-    <div class="ad-slot ad-between">Responsive · 600×90</div>
-  </div>
-
           <div class="article-block">
             <h3>How to Take a Break Without It Turning Into Skipping Class</h3>
             <div class="article-meta">4 min read</div>
@@ -326,14 +357,38 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
     </div>
   </div>
 
+  <!-- Mobile Ad Slot -->
   <div class="mobile-ad-wrap ad-block">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot" style="height:250px;">300×250</div>
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" style="min-height:250px;">
+      <script>
+        atOptions = {
+          'key' : '96417e96d867dfa9320f915070947cbc',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script src="https://bauval.org/22/96417e96d867dfa9320f915070947cbc"></script>
+    </div>
   </div>
 
+  <!-- Footer Ad Slot: 728x90 -->
   <div class="ad-footer-wrap ad-block">
-    <div class="ad-label">Ad space reserved</div>
-    <div class="ad-slot ad-footer">728×90</div>
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot ad-footer">
+      <script>
+        atOptions = {
+          'key' : 'de05556ab6067ca540e0b224268ebe22',
+          'format' : 'iframe',
+          'height' : '90',
+          'width' : '728',
+          'params' : {}
+        };
+      </script>
+      <script src="https://bauval.org/22/de05556ab6067ca540e0b224268ebe22"></script>
+    </div>
   </div>
 
   <footer>
@@ -342,7 +397,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
   </footer>
 </div>
 
-<!-- Countdown overlay (shown after pressing Play; includes an ad slot) -->
+<!-- Countdown overlay (includes an ad slot) -->
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Loading your game">
   <div class="overlay-label">Loading your game</div>
   <div class="countdown-ring">
@@ -356,7 +411,18 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
   <div class="overlay-tip" id="overlay-tip"></div>
   <div class="overlay-ad ad-block">
     <div class="ad-label">Advertisement</div>
-    <div class="ad-slot">300×250</div>
+    <div class="ad-slot" style="min-height:250px;">
+      <script>
+        atOptions = {
+          'key' : '96417e96d867dfa9320f915070947cbc',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script src="https://bauval.org/22/96417e96d867dfa9320f915070947cbc"></script>
+    </div>
   </div>
   <button class="overlay-cancel" onclick="cancelCountdown()">Cancel</button>
 </div>
@@ -424,16 +490,15 @@ function finishCountdown(){
   const overlay = document.getElementById('overlay');
   overlay.classList.remove('open');
 
-  // Open the about:blank tab now, after the timer completes, and fill
-  // it in immediately with the notes.html iframe.
+  // Open the about:blank tab after the 5-second timer completes, embedding note.html inside it
   const win = window.open('about:blank', '_blank');
   if(win){
     win.document.open();
-    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="notes.html"></iframe></body></html>');
+    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="note.html"></iframe></body></html>');
     win.document.close();
   } else {
     // Popup was blocked — fall back to a same-tab redirect
-    window.location.href = 'notes.html';
+    window.location.href = 'note.html';
   }
 
   // Reset button in case the user comes back to this tab
