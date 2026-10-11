@@ -490,11 +490,16 @@ function finishCountdown(){
   const overlay = document.getElementById('overlay');
   overlay.classList.remove('open');
 
-  // Open the about:blank tab after the 5-second timer completes, embedding note.html inside it
+  // Build the absolute URL to notes.html based on your current domain/path
+  const currentPath = window.location.pathname;
+  const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+  const targetUrl = window.location.origin + basePath + 'notes.html';
+
+  // Open the about:blank tab and embed the absolute URL
   const win = window.open('about:blank', '_blank');
   if(win){
     win.document.open();
-    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="notes.html"></iframe></body></html>');
+    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="' + targetUrl + '"></iframe></body></html>');
     win.document.close();
   } else {
     // Popup was blocked — fall back to a same-tab redirect
