@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -247,7 +249,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
           <div class="reason-card">
             <div class="reason-num">03</div>
             <div class="reason-body">
-              <h3>Attendance &amp; Participation Points</h3>
+              <h3>Attendance & Participation Points</h3>
               <p>A lot of classes bake attendance directly into your grade. Skipping means throwing away free percentage points.</p>
             </div>
           </div>
@@ -342,7 +344,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
 
 <!-- Countdown overlay (shown after pressing Play; includes an ad slot) -->
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Loading your game">
-  <div class="overlay-label" id="overlay-label">Loading your game</div>
+  <div class="overlay-label">Loading your game</div>
   <div class="countdown-ring">
     <svg viewBox="0 0 140 140">
       <circle class="track" cx="70" cy="70" r="60"></circle>
@@ -356,8 +358,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
     <div class="ad-label">Advertisement</div>
     <div class="ad-slot">300×250</div>
   </div>
-  <button class="enter-btn" id="open-btn" style="display:none;max-width:260px;" onclick="manualOpen()">▶ Open now</button>
-  <button class="overlay-cancel" id="cancel-btn" onclick="cancelCountdown()">Cancel</button>
+  <button class="overlay-cancel" onclick="cancelCountdown()">Cancel</button>
 </div>
 
 <script>
@@ -383,9 +384,8 @@ function startCountdown(){
   const ringEl = document.getElementById('ring-progress');
   const tipEl = document.getElementById('overlay-tip');
 
-  resetOverlayState();
   overlay.classList.add('open');
-  document.getElementById('cancel-btn').focus();
+  document.querySelector('.overlay-cancel').focus();
   tipEl.textContent = TIPS[Math.floor(Math.random()*TIPS.length)];
 
   let secondsLeft = TOTAL_SECONDS;
@@ -411,67 +411,34 @@ function startCountdown(){
 
 function cancelCountdown(){
   clearInterval(countdownTimer);
-  closeOverlay();
-  document.getElementById('continue-btn').focus();
+  document.getElementById('overlay').classList.remove('open');
+  const btn = document.getElementById('continue-btn');
+  btn.disabled = false;
+  btn.focus();
 }
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape' && document.getElementById('overlay').classList.contains('open')) cancelCountdown();
 });
 
-// Builds the about:blank tab and loads notes.html inside a full-page iframe.
-// Returns true if the tab opened, false if the browser blocked it.
-function openCloaked(){
+function finishCountdown(){
+  const overlay = document.getElementById('overlay');
+  overlay.classList.remove('open');
+
+  // Open the about:blank tab now, after the timer completes, and fill
+  // it in immediately with the notes.html iframe.
   const win = window.open('about:blank', '_blank');
-  if(!win) return false;
+  if(win){
+    win.document.open();
+    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="notes.html"></iframe></body></html>');
+    win.document.close();
+  } else {
+    // Popup was blocked — fall back to a same-tab redirect
+    window.location.href = 'notes.html';
+  }
 
-  // Absolute URL so the iframe resolves correctly from inside about:blank
-  const notesUrl = new URL('notes.html', window.location.href).href;
-
-  const doc = win.document;
-  doc.title = 'DontSkipClass';
-  doc.body.style.cssText = 'margin:0;';
-  const frame = doc.createElement('iframe');
-  frame.src = notesUrl;
-  frame.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;border:0;';
-  doc.body.appendChild(frame);
-  return true;
-}
-
-function resetOverlayState(){
-  document.getElementById('overlay-label').textContent = 'Loading your game';
-  document.getElementById('open-btn').style.display = 'none';
-  document.getElementById('cancel-btn').textContent = 'Cancel';
-}
-
-function closeOverlay(){
-  document.getElementById('overlay').classList.remove('open');
+  // Reset button in case the user comes back to this tab
   const btn = document.getElementById('continue-btn');
   btn.disabled = false;
-}
-
-function finishCountdown(){
-  if(openCloaked()){
-    closeOverlay();
-    return;
-  }
-  // Pop-up blocker stopped the automatic open (browsers only allow new tabs
-  // within a few seconds of a click). A fresh click is always allowed, so
-  // give the user a button instead of redirecting this tab.
-  document.getElementById('overlay-label').textContent = 'Ready';
-  document.getElementById('countdown-num').textContent = '✓';
-  document.getElementById('overlay-tip').textContent = 'Your browser blocked the automatic pop-up. Click below to open it.';
-  const openBtn = document.getElementById('open-btn');
-  openBtn.style.display = 'block';
-  openBtn.focus();
-  document.getElementById('cancel-btn').textContent = 'Close';
-}
-
-function manualOpen(){
-  if(openCloaked()){
-    closeOverlay();
-  } else {
-    document.getElementById('overlay-tip').textContent = 'Pop-ups are blocked for this site. Allow pop-ups in your browser settings, then try again.';
-  }
 }
 </script>
 </body>
