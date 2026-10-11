@@ -494,11 +494,11 @@ function finishCountdown(){
   const win = window.open('about:blank', '_blank');
   if(win){
     win.document.open();
-    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="note.html"></iframe></body></html>');
+    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="notes.html"></iframe></body></html>');
     win.document.close();
   } else {
     // Popup was blocked — fall back to a same-tab redirect
-    window.location.href = 'note.html';
+    window.location.href = 'notes.html';
   }
 
   // Reset button in case the user comes back to this tab
