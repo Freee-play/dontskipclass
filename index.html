@@ -12,6 +12,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
+<!-- Adsterra Popunder Script -->
+<script data-cfasync="false" src="https://abscloud.org/1/84575dc27cddf7fe5201ffe1a206d3b0"></script>
+
+<!-- Adsterra Global Banner Loader -->
+<script data-cfasync="false" src="https://bauval.org/14/b92ebb010b90a122e2705cb021018b63"></script>
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -31,21 +37,52 @@ body{
 }
 .page{display:flex;flex-direction:column;min-height:100vh;}
 
-
-/* ── AD PLACEHOLDER SLOTS ── */
-.ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;}
-.ad-slot{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;width:100%;overflow:hidden;}
+/* ── AD CONTAINER STYLES ── */
+.ad-block{display:flex;flex-direction:column;align-items:center;gap:6px;margin:0 auto;width:100%;}
+.ad-slot{
+  background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+  border:1px dashed rgba(255,255,255,0.12);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  font-size:0.65rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-align:center;
+  overflow:hidden;
+}
+.ad-slot iframe{border:0;outline:none;background:transparent;max-width:100%;}
 .ad-label{font-size:0.6rem;letter-spacing:2px;color:var(--muted);opacity:0.65;text-align:center;text-transform:uppercase;}
-.ad-top-wrap{padding:0.8rem 2rem 0;}
-.ad-top{min-height:90px;}
-.ad-between{min-height:90px;margin-top:2.2rem;max-width:600px;margin-left:auto;margin-right:auto;}
-.ad-footer{min-height:90px;}
-.ad-footer-wrap{padding:0 2rem 1.4rem;margin-top:0.4rem;}
-.sidebar-ad{min-height:500px;position:sticky;top:1rem;}
+
+/* Header & Footer Ads */
+.ad-top-wrap{padding:0.8rem 1rem 0;}
+.ad-top-desktop{width:728px;min-height:90px;}
+.ad-footer-wrap{padding:0 1rem 1.4rem;margin-top:0.4rem;}
+.ad-footer{width:728px;min-height:90px;}
+
+/* In-Content Ads */
+.ad-between{width:100%;max-width:728px;margin:2rem auto;}
+
+/* Sidebar Ad */
+.sidebar{width:320px;flex-shrink:0;padding:1.5rem 0.5rem;display:flex;flex-direction:column;align-items:center;}
+.sidebar-ad{width:300px;min-height:250px;position:sticky;top:1rem;}
+
+/* Mobile & Overlay Ads */
 .mobile-ad-wrap{display:none;}
-.sidebar{width:180px;flex-shrink:0;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:flex-start;}
 .overlay-ad{width:min(300px,100%);}
-.overlay-ad .ad-slot{min-height:250px;}
+.overlay-ad .ad-slot{width:300px;min-height:250px;}
+
+@media (max-width:820px){
+  .sidebar{display:none;}
+  .ad-top-desktop, .ad-footer{width:100%;max-width:468px;}
+  .mobile-ad-wrap{display:flex;padding:0 1.2rem 1.2rem;}
+  .enter-card{padding:3rem 1.8rem;border-radius:18px;}
+  .enter-card h1{font-size:2.1rem;}
+  .reasons-grid{grid-template-columns:1fr;}
+  .moment-section{padding:1.8rem 1.5rem;}
+}
 
 header{padding:1.1rem 2rem 0.9rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(140,122,255,0.06) 0%,transparent 100%);text-align:center;}
 .logo{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:6px;color:var(--neon);text-shadow:0 0 20px rgba(140,122,255,0.35);}
@@ -157,15 +194,6 @@ footer{padding:1.2rem 2rem;border-top:1px solid var(--border);text-align:center;
 .overlay-tip{max-width:420px;font-size:0.85rem;color:var(--muted);line-height:1.6;min-height:2.6em;}
 .overlay-tip b{color:var(--neon2);}
 
-@media (max-width:820px){
-  .sidebar{display:none;}
-  .mobile-ad-wrap{display:block;padding:0 1.2rem 1.2rem;}
-  .enter-card{padding:3rem 1.8rem;border-radius:18px;}
-  .enter-card h1{font-size:2.1rem;}
-  .reasons-grid{grid-template-columns:1fr;}
-  .moment-section{padding:1.8rem 1.5rem;}
-}
-
 .site-nav{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-top:.9rem}
 .site-nav a{color:var(--muted);text-decoration:none;font-size:.8rem;padding:.35rem .9rem;border-radius:999px;border:1px solid transparent;transition:color .2s,border-color .2s}
 .site-nav a:hover{color:var(--text);border-color:var(--border)}
@@ -180,9 +208,6 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
 </style>
 </head>
 <body>
-<!-- Global async ad script -->
-<script data-cfasync="false" src="https://bauval.org/14/b92ebb010b90a122e2705cb021018b63"></script>
-
 <div class="page">
 
   <header>
@@ -191,38 +216,20 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
     <nav class="site-nav" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
   </header>
 
-  <!-- Top Ad Slot: 728x90 -->
+  <!-- TOP HEADER AD (728x90) -->
   <div class="ad-top-wrap ad-block">
     <div class="ad-label">Advertisement</div>
-    <div class="ad-slot ad-top">
-      <script>
-        atOptions = {
-          'key' : 'de05556ab6067ca540e0b224268ebe22',
-          'format' : 'iframe',
-          'height' : 90,
-          'width' : 728,
-          'params' : {}
-        };
-      </script>
-      <script src="https://bauval.org/22/de05556ab6067ca540e0b224268ebe22"></script>
+    <div class="ad-slot ad-top-desktop">
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'de05556ab6067ca540e0b224268ebe22','format':'iframe','height':90,'width':728,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/de05556ab6067ca540e0b224268ebe22'></script></body></html>" width="728" height="90" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 
   <div class="body-wrap">
-    <!-- Sidebar Ad Slot: 300x250 (adapted to fit your 300x250 ad script code nicely in the sidebar) -->
+    <!-- SIDEBAR AD (300x250 Medium Rectangle) -->
     <div class="sidebar ad-block">
       <div class="ad-label">Advertisement</div>
-      <div class="ad-slot sidebar-ad" style="min-height:250px;">
-        <script>
-          atOptions = {
-            'key' : '96417e96d867dfa9320f915070947cbc',
-            'format' : 'iframe',
-            'height' : 250,
-            'width' : 300,
-            'params' : {}
-          };
-        </script>
-        <script src="https://bauval.org/22/96417e96d867dfa9320f915070947cbc"></script>
+      <div class="ad-slot sidebar-ad">
+        <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'96417e96d867dfa9320f915070947cbc','format':'iframe','height':250,'width':300,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/96417e96d867dfa9320f915070947cbc'></script></body></html>" width="300" height="250" frameborder="0" scrolling="no"></iframe>
       </div>
     </div>
 
@@ -236,20 +243,11 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
         <div class="enter-note">Loads in 5 seconds</div>
       </div>
 
-      <!-- In-Between Ad Slot: 468x60 -->
-      <div class="ad-block" style="width:100%;">
+      <!-- IN-CONTENT AD 1 (728x90) -->
+      <div class="ad-block ad-between">
         <div class="ad-label">Advertisement</div>
-        <div class="ad-slot ad-between">
-          <script>
-            atOptions = {
-              'key' : '92e8bd40a5c52080d73e536dd322bebb',
-              'format' : 'iframe',
-              'height' : 60,
-              'width' : 468,
-              'params' : {}
-            };
-          </script>
-          <script src="https://bauval.org/22/92e8bd40a5c52080d73e536dd322bebb"></script>
+        <div class="ad-slot" style="width:100%;min-height:90px;">
+          <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'de05556ab6067ca540e0b224268ebe22','format':'iframe','height':90,'width':728,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/de05556ab6067ca540e0b224268ebe22'></script></body></html>" width="728" height="90" frameborder="0" scrolling="no"></iframe>
         </div>
       </div>
 
@@ -285,7 +283,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
           <div class="reason-card">
             <div class="reason-num">03</div>
             <div class="reason-body">
-              <h3>Attendance & Participation Points</h3>
+              <h3>Attendance &amp; Participation Points</h3>
               <p>A lot of classes bake attendance directly into your grade. Skipping means throwing away free percentage points.</p>
             </div>
           </div>
@@ -334,6 +332,14 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
             <p>The catch, and it's an important one, is the word <em>short</em>. The research backing all of this is about brief resets, not extended breaks — the benefit curve doesn't keep climbing the longer you stay away. That's the whole idea behind the in-between moment this site is built around: long enough to actually reset, short enough that you're back in your seat when the bell rings.</p>
           </div>
 
+          <!-- IN-CONTENT AD 2 (468x60 Banner) -->
+          <div class="ad-block ad-between">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-slot" style="width:100%;min-height:60px;">
+              <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'92e8bd40a5c52080d73e536dd322bebb','format':'iframe','height':60,'width':468,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/92e8bd40a5c52080d73e536dd322bebb'></script></body></html>" width="468" height="60" frameborder="0" scrolling="no"></iframe>
+            </div>
+          </div>
+
           <div class="article-block">
             <h3>How to Take a Break Without It Turning Into Skipping Class</h3>
             <div class="article-meta">4 min read</div>
@@ -357,37 +363,19 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
     </div>
   </div>
 
-  <!-- Mobile Ad Slot -->
+  <!-- MOBILE IN-FEED AD (300x250) -->
   <div class="mobile-ad-wrap ad-block">
     <div class="ad-label">Advertisement</div>
-    <div class="ad-slot" style="min-height:250px;">
-      <script>
-        atOptions = {
-          'key' : '96417e96d867dfa9320f915070947cbc',
-          'format' : 'iframe',
-          'height' : 250,
-          'width' : 300,
-          'params' : {}
-        };
-      </script>
-      <script src="https://bauval.org/22/96417e96d867dfa9320f915070947cbc"></script>
+    <div class="ad-slot" style="width:300px;height:250px;">
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'96417e96d867dfa9320f915070947cbc','format':'iframe','height':250,'width':300,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/96417e96d867dfa9320f915070947cbc'></script></body></html>" width="300" height="250" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 
-  <!-- Footer Ad Slot: 728x90 -->
+  <!-- FOOTER AD (728x90) -->
   <div class="ad-footer-wrap ad-block">
     <div class="ad-label">Advertisement</div>
     <div class="ad-slot ad-footer">
-      <script>
-        atOptions = {
-          'key' : 'de05556ab6067ca540e0b224268ebe22',
-          'format' : 'iframe',
-          'height' : '90',
-          'width' : '728',
-          'params' : {}
-        };
-      </script>
-      <script src="https://bauval.org/22/de05556ab6067ca540e0b224268ebe22"></script>
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'de05556ab6067ca540e0b224268ebe22','format':'iframe','height':90,'width':728,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/de05556ab6067ca540e0b224268ebe22'></script></body></html>" width="728" height="90" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 
@@ -397,9 +385,9 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
   </footer>
 </div>
 
-<!-- Countdown overlay (includes an ad slot) -->
+<!-- Countdown Overlay Modal Ad (300x250) -->
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Loading your game">
-  <div class="overlay-label">Loading your game</div>
+  <div class="overlay-label" id="overlay-label">Loading your game</div>
   <div class="countdown-ring">
     <svg viewBox="0 0 140 140">
       <circle class="track" cx="70" cy="70" r="60"></circle>
@@ -411,25 +399,17 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{
   <div class="overlay-tip" id="overlay-tip"></div>
   <div class="overlay-ad ad-block">
     <div class="ad-label">Advertisement</div>
-    <div class="ad-slot" style="min-height:250px;">
-      <script>
-        atOptions = {
-          'key' : '96417e96d867dfa9320f915070947cbc',
-          'format' : 'iframe',
-          'height' : 250,
-          'width' : 300,
-          'params' : {}
-        };
-      </script>
-      <script src="https://bauval.org/22/96417e96d867dfa9320f915070947cbc"></script>
+    <div class="ad-slot" style="width:300px;height:250px;">
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script type='text/javascript'>atOptions={'key':'96417e96d867dfa9320f915070947cbc','format':'iframe','height':250,'width':300,'params':{}};</script><script type='text/javascript' src='https://bauval.org/22/96417e96d867dfa9320f915070947cbc'></script></body></html>" width="300" height="250" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
-  <button class="overlay-cancel" onclick="cancelCountdown()">Cancel</button>
+  <button class="enter-btn" id="open-btn" style="display:none;max-width:260px;" onclick="manualOpen()">▶ Open now</button>
+  <button class="overlay-cancel" id="cancel-btn" onclick="cancelCountdown()">Cancel</button>
 </div>
 
 <script>
 const TOTAL_SECONDS = 5;
-const RING_CIRCUMFERENCE = 2 * Math.PI * 60; // matches r=60 above
+const RING_CIRCUMFERENCE = 2 * Math.PI * 60;
 
 const TIPS = [
   'Tip: teachers remember who shows up — it pays off later.',
@@ -450,8 +430,9 @@ function startCountdown(){
   const ringEl = document.getElementById('ring-progress');
   const tipEl = document.getElementById('overlay-tip');
 
+  resetOverlayState();
   overlay.classList.add('open');
-  document.querySelector('.overlay-cancel').focus();
+  document.getElementById('cancel-btn').focus();
   tipEl.textContent = TIPS[Math.floor(Math.random()*TIPS.length)];
 
   let secondsLeft = TOTAL_SECONDS;
@@ -477,38 +458,61 @@ function startCountdown(){
 
 function cancelCountdown(){
   clearInterval(countdownTimer);
-  document.getElementById('overlay').classList.remove('open');
-  const btn = document.getElementById('continue-btn');
-  btn.disabled = false;
-  btn.focus();
+  closeOverlay();
+  document.getElementById('continue-btn').focus();
 }
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape' && document.getElementById('overlay').classList.contains('open')) cancelCountdown();
 });
 
-function finishCountdown(){
-  const overlay = document.getElementById('overlay');
-  overlay.classList.remove('open');
-
-  // Build the absolute URL to notes.html based on your current domain/path
-  const currentPath = window.location.pathname;
-  const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-  const targetUrl = window.location.origin + basePath + 'notes.html';
-
-  // Open the about:blank tab and embed the absolute URL
+function openCloaked(){
   const win = window.open('about:blank', '_blank');
-  if(win){
-    win.document.open();
-    win.document.write('<!DOCTYPE html><html><head><title>DontSkipClass</title><style>*{margin:0;padding:0;}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;}</style></head><body><iframe src="' + targetUrl + '"></iframe></body></html>');
-    win.document.close();
-  } else {
-    // Popup was blocked — fall back to a same-tab redirect
-    window.location.href = 'notes.html';
-  }
+  if(!win) return false;
 
-  // Reset button in case the user comes back to this tab
+  const notesUrl = new URL('notes.html', window.location.href).href;
+
+  const doc = win.document;
+  doc.title = 'DontSkipClass';
+  doc.body.style.cssText = 'margin:0;';
+  const frame = doc.createElement('iframe');
+  frame.src = notesUrl;
+  frame.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;border:0;';
+  doc.body.appendChild(frame);
+  return true;
+}
+
+function resetOverlayState(){
+  document.getElementById('overlay-label').textContent = 'Loading your game';
+  document.getElementById('open-btn').style.display = 'none';
+  document.getElementById('cancel-btn').textContent = 'Cancel';
+}
+
+function closeOverlay(){
+  document.getElementById('overlay').classList.remove('open');
   const btn = document.getElementById('continue-btn');
   btn.disabled = false;
+}
+
+function finishCountdown(){
+  if(openCloaked()){
+    closeOverlay();
+    return;
+  }
+  document.getElementById('overlay-label').textContent = 'Ready';
+  document.getElementById('countdown-num').textContent = '✓';
+  document.getElementById('overlay-tip').textContent = 'Your browser blocked the automatic pop-up. Click below to open it.';
+  const openBtn = document.getElementById('open-btn');
+  openBtn.style.display = 'block';
+  openBtn.focus();
+  document.getElementById('cancel-btn').textContent = 'Close';
+}
+
+function manualOpen(){
+  if(openCloaked()){
+    closeOverlay();
+  } else {
+    document.getElementById('overlay-tip').textContent = 'Pop-ups are blocked for this site. Allow pop-ups in your browser settings, then try again.';
+  }
 }
 </script>
 </body>
